@@ -250,7 +250,7 @@ section.hero { padding: 0; border-bottom: 0; }
 /* ---------- Timeline (News / Education / Experience) ---------- */
 .timeline { list-style: none; margin: 0; padding: 0; }
 .timeline li { display: flex; gap: 12px; margin-bottom: 8px; }
-.timeline .date { flex: 0 0 auto; min-width: 64px; font-weight: 700; white-space: nowrap; }
+.timeline .date { flex: 0 0 auto; min-width: 140px; /* fits "2019.03 - 2025.02" so descriptions line up */ font-weight: 700; white-space: nowrap; }
 
 /* ---------- Research card ---------- */
 /* Hand-drawn outline: slightly uneven corners on the main line,
@@ -273,7 +273,7 @@ section.hero { padding: 0; border-bottom: 0; }
   pointer-events: none;
 }
 .paper-thumb {
-  flex: 0 0 250px;
+  flex: 0 0 170px;
   overflow: hidden;
   border-radius: inherit;
   border-top-right-radius: 0;
@@ -282,13 +282,16 @@ section.hero { padding: 0; border-bottom: 0; }
   border-right: 1px solid var(--card-border);
   display: grid;
   place-items: center;
-  min-height: 160px;
+  min-height: 130px;
 }
 .paper-thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .paper-thumb.empty img { display: none; }
+.paper-thumb.photo img { object-fit: cover; } /* photos fill the frame; figures stay "contain" */
 .paper-thumb.empty { background: var(--btn-bg); }
 .paper-body { padding: 20px; }
-.paper-title { margin: 0 0 8px; font-size: 18px; font-weight: 600; line-height: 1.35; }
+.paper-title a { color: inherit; }
+.paper-title a:hover { color: var(--link); }
+.paper-title { margin: 0 0 8px; font-size: 17px; font-weight: 600; line-height: 1.35; }
 .authors { margin: 0 0 6px; font-size: 13px; color: var(--muted); }
 .authors strong { color: var(--text); }
 .venue { margin: 0 0 6px; font-size: 13px; font-style: italic; color: var(--muted); }
@@ -344,6 +347,28 @@ section.hero { padding: 0; border-bottom: 0; }
 .carousel-arrow:hover { filter: brightness(1.2); }
 .carousel-arrow:disabled { visibility: hidden; }
 
+/* ---------- Licenses ---------- */
+.plain-list { margin: 0; padding-left: 20px; }
+.plain-list li { margin-bottom: 6px; }
+
+/* ---------- Affiliation logos ---------- */
+/* A divider line, then the logos lined up on the right */
+.logos {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 28px;
+  margin-top: 8px;
+  padding-top: 24px;
+  border-top: 1px solid var(--divider);
+}
+.logos a { display: block; }
+.logos a[hidden] { display: none; }
+.logos img { display: block; height: 60px; width: auto; }
+/* Keep the official logo colors in dark mode by giving them a light backing */
+:root[data-theme="dark"] .logos a { padding: 6px 10px; background: rgba(255, 255, 255, 0.92); border-radius: 10px; }
+
 /* ---------- Footer ---------- */
 .footer {
   text-align: center;
@@ -371,6 +396,11 @@ section[id] { scroll-margin-top: 72px; } /* keep headings clear of the sticky na
     left: max(16px, calc(50% - 560px));
     width: 140px;
     z-index: 5;
+    /* Light panel so the list stays readable when it overlaps the banner photo */
+    padding: 10px 8px 10px 4px;
+    background: var(--bg);
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(16, 40, 80, 0.12);
   }
   .toc ul { list-style: none; margin: 0; padding: 0 0 0 14px; border-left: 2px solid var(--divider); }
   .toc li { margin: 4px 0; }
@@ -403,6 +433,8 @@ section[id] { scroll-margin-top: 72px; } /* keep headings clear of the sticky na
   .hero-below { grid-template-columns: 1fr; gap: 0; }
   .hero-below .buttons { order: -1; padding-top: 91px; }
   .paper { flex-direction: column; }
+  .paper-thumb { height: 170px; min-height: 0; }
+  .paper-thumb.empty { display: none; } /* no image yet: skip the gray box on phones */
   .paper-thumb {
     flex-basis: auto;
     border-right: 0;

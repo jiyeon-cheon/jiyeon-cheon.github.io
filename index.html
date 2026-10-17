@@ -72,6 +72,7 @@
       <li><a href="#fieldwork">Fieldwork</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#experience">Experience</a></li>
+      <li><a href="#licenses">Licenses</a></li>
       <li><a href="#photos">Photos</a></li>
     </ul>
   </nav>
@@ -133,14 +134,25 @@
       <h3 class="section-title">Research</h3>
       <!-- Copy this <article> block for each paper -->
       <article class="paper">
-        <div class="paper-thumb">
-          <img src="images/paper1.png" alt="" onerror="this.parentElement.classList.add('empty')" />
+        <div class="paper-thumb photo">
+          <img src="images/photos/photo-11.jpeg" alt="Weddell seal carrying a tag" onerror="this.parentElement.classList.add('empty')" />
         </div>
         <div class="paper-body">
-          <h4 class="paper-title">Paper Title Goes Here</h4>
-          <p class="authors"><strong>Ji-Yeon Cheon</strong>, Co-author A, Co-author B, Advisor</p>
-          <p class="venue">Conference / Journal Name, 2026</p>
-          <p class="paper-desc">One or two sentences describing what this paper is about and what you found.</p>
+          <h4 class="paper-title">Diving and foraging behavior of Weddell seals near ice shelves in the Eastern Amundsen Sea, Antarctica</h4>
+          <p class="authors"><strong>Ji-Yeon Cheon</strong>, Hyunjae Chung, Jikang Park, Choon-Ki Lee, Byeong-Hoon Kim, Seung-Tae Yoon, Hyun A Choi, Ji Sung Na, Sukyoung Yun, Won Sang Lee, Chung Yeon Hwang, Won Young Lee</p>
+          <p class="venue"><a href="https://www.smmconference.org/" target="_blank" rel="noopener">26th Biennial Conference on the Biology of Marine Mammals (SMM 2026)</a>, San Juan, Puerto Rico, 2026</p>
+          <!-- Optional summary: <p class="paper-desc">One or two sentences about this study.</p> -->
+        </div>
+      </article>
+      <article class="paper">
+        <div class="paper-thumb photo">
+          <!-- Cropped from Figure 1(b) of the paper -->
+          <img src="images/research/muskox.jpg" alt="Muskox adult female and calf on Ella Island, East Greenland" style="object-position: 35% 50%" onerror="this.parentElement.classList.add('empty')" />
+        </div>
+        <div class="paper-body">
+          <h4 class="paper-title"><a href="https://doi.org/10.1002/ece3.8879" target="_blank" rel="noopener">Fecal microbiota and diets of muskox female adults and calves</a></h4>
+          <p class="authors"><strong>Ji-Yeon Cheon</strong>, Hyunjun Cho, Mincheol Kim, Hyun Je Park, Tae-Yoon S. Park, Won Young Lee</p>
+          <p class="venue">Ecology and Evolution, 12(5), e8879, 2022</p>
         </div>
       </article>
     </section>
@@ -148,9 +160,11 @@
     <!-- ========== Fieldwork (expeditions / field surveys) ========== -->
     <section id="fieldwork">
       <h3 class="section-title">Fieldwork</h3>
-      <!-- Add one <li> per expedition: period, then place / target species / role -->
+      <!-- Add one <li> per expedition: period, then cruise / station / what you surveyed -->
       <ul class="timeline">
-        <li><span class="date">20XX.XX - 20XX.XX</span><span>Expedition name, Location (e.g. King Sejong Station, Antarctica) — what you surveyed</span></li>
+        <li><span class="date">2026.01 - 2026.02</span><span>2025/2026 Antarctic Cruise — ANA16C Thwaites cruise</span></li>
+        <li><span class="date">2024.01</span><span>2023/2024 Antarctic Cruise — ANA14B Thwaites cruise</span></li>
+        <li><span class="date">2022.01 - 2022.02</span><span>2021/2022 Antarctic Cruise — ANA12C Thwaites cruise</span></li>
       </ul>
     </section>
 
@@ -158,8 +172,9 @@
     <section id="education">
       <h3 class="section-title">Education</h3>
       <ul class="timeline">
-        <li><span class="date">20XX.XX - Present</span><span>Ph.D., Your University, Department, advised by <a href="#">Prof. ___</a></span></li>
-        <li><span class="date">20XX.XX - 20XX.XX</span><span>B.S., Your University, Major</span></li>
+        <li><span class="date">2025.03 - Present</span><span>Ph.D., Department of Earth and Environmental Sciences, Seoul National University</span></li>
+        <li><span class="date">2019.03 - 2025.02</span><span>B.S., Division of Environmental Science &amp; Ecological Engineering, College of Life Sciences and Biotechnology, Korea University</span></li>
+        <li><span class="date">2020.03 - 2025.02</span><span>B.S., Interdisciplinary Major in Microbial Convergence Technology, College of Life Sciences and Biotechnology, Korea University</span></li>
       </ul>
     </section>
 
@@ -167,7 +182,19 @@
     <section id="experience">
       <h3 class="section-title">Experience</h3>
       <ul class="timeline">
-        <li><span class="date">20XX.XX - 20XX.XX</span><span>Research Intern, <a href="#">Lab Name</a>, advised by <a href="#">Prof. ___</a></span></li>
+        <li><span class="date">2020.03 - Present</span><span>Research Intern, <a href="https://www.kopri.re.kr" target="_blank" rel="noopener">Korea Polar Research Institute (KOPRI)</a></span></li>
+        <li><span class="date">2022.12 - 2023.02</span><span>Research Intern, Marine Environment Lab, Korea University</span></li>
+        <li><span class="date">2019.06 - 2019.11</span><span>Jinri Scholarship Program, Division of Environmental Science &amp; Ecological Engineering, Korea University</span></li>
+      </ul>
+    </section>
+
+    <!-- ========== Licenses ========== -->
+    <section id="licenses">
+      <h3 class="section-title">Licenses</h3>
+      <ul class="plain-list">
+        <li>Advanced Open Water Diver</li>
+        <li>Powered Water Leisure Craft Operator License (Korea)</li>
+        <li>Unmanned Aerial Vehicle (Drone) Pilot Certificate, Class 4 (Korea)</li>
       </ul>
     </section>
 
@@ -226,6 +253,14 @@
         <button class="carousel-arrow next" type="button" aria-label="Next photos"><svg viewBox='0 0 40 40' width='36' height='36' aria-hidden='true'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'><path d='M26.5 5.5c-2 2.3-5.4 5.6-8.6 8.5-2.6 2.4-5.8 4.6-8.4 6.6 2.9 1.7 6.4 4.7 9.4 7.6 2.5 2.4 5 4.6 7.6 6.9' stroke-width='2.8'/><path d='M24.6 7.8c-3.4 3.1-7.8 7.6-13.3 12.6 4.8 3.4 9.1 7.7 13.9 11.9' stroke-width='1.3' opacity='.6'/><path d='M8.8 20.7c3.5-.9 7.4-.2 11.3-.6 4.4-.4 8.6.5 12.7-.4' stroke-width='2.5'/><path d='M12.4 21.9c5.6-.6 11.4.4 17.6-.3 1.4-.1 2.6.3 3.6.1' stroke-width='1.1' opacity='.5'/><path d='M31.6 18.6c.9.6 1.6 1.2 1.9 1.6' stroke-width='1.4' opacity='.7'/></g></svg></button>
       </div>
     </section>
+
+    <!-- ========== Affiliation logos (bottom right) ========== -->
+    <!-- Put logo files in images/logos/ with these names; a missing file is simply hidden -->
+    <div class="logos">
+      <a href="https://www.snu.ac.kr" target="_blank" rel="noopener"><img src="images/logos/snu.png" alt="Seoul National University" onerror="this.parentElement.hidden=true" /></a>
+      <a href="https://www.korea.ac.kr" target="_blank" rel="noopener"><img src="images/logos/korea-university.png" alt="Korea University" onerror="this.parentElement.hidden=true" /></a>
+      <a href="https://www.kopri.re.kr" target="_blank" rel="noopener"><img src="images/logos/kopri.png" alt="Korea Polar Research Institute" onerror="this.parentElement.hidden=true" /></a>
+    </div>
   </main>
 
   <footer class="footer">
