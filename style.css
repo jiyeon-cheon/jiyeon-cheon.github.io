@@ -1,33 +1,43 @@
 :root {
-  --bg: #fafafa;
-  --text: #1a202c;
-  --muted: #4a5568;
-  --link: #4367a8;
+  --bg: #f3f8fd;
+  --text: #16243a;
+  --muted: #4a5a70;
+  --link: #1f5fbf;
   --divider: rgba(0, 0, 0, 0.16);
   --underline: #525252;
   --card-border: rgba(0, 0, 0, 0.1);
   --btn-bg: rgba(0, 0, 0, 0.03);
   --btn-border: rgba(0, 0, 0, 0.12);
-  --nav-bg: rgba(255, 255, 255, 0.6);
-  --toggle-bg: #805ad5;
+  --nav-bg: #1a4b9a;
+  --nav-fg: #fff;
+  --toggle-bg: rgba(255, 255, 255, 0.18);
   --toggle-fg: #fff;
   --thumb-bg: #fff;
+  --accent: #1f5fbf;
+  --highlight: rgba(64, 136, 226, 0.9);
+  --sketch: #2c4a75;
+  --accent-fg: #fff;
 }
 
 :root[data-theme="dark"] {
-  --bg: #202023;
+  --bg: #111a26;
   --text: rgba(255, 255, 255, 0.92);
   --muted: rgba(255, 255, 255, 0.7);
-  --link: #ff63c3;
+  --link: #7fb6ff;
   --divider: rgba(255, 255, 255, 0.16);
   --underline: #525252;
   --card-border: rgba(255, 255, 255, 0.12);
   --btn-bg: rgba(255, 255, 255, 0.04);
   --btn-border: rgba(255, 255, 255, 0.16);
-  --nav-bg: rgba(32, 32, 35, 0.6);
-  --toggle-bg: #f6ad55;
-  --toggle-fg: #1a202c;
+  --nav-bg: #0d2a57;
+  --nav-fg: #fff;
+  --toggle-bg: rgba(255, 255, 255, 0.14);
+  --toggle-fg: #ffd36b;
   --thumb-bg: #fff;
+  --accent: #3d82e0;
+  --highlight: rgba(96, 160, 245, 0.8);
+  --sketch: rgba(200, 220, 255, 0.7);
+  --accent-fg: #fff;
 }
 
 * { box-sizing: border-box; }
@@ -53,8 +63,6 @@ a:hover { text-decoration: underline; }
   top: 0;
   z-index: 10;
   background: var(--nav-bg);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 .navbar-inner {
   max-width: 1024px;
@@ -65,12 +73,34 @@ a:hover { text-decoration: underline; }
   justify-content: space-between;
 }
 .brand {
-  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--nav-fg);
   font-weight: 700;
   font-size: 18px;
   letter-spacing: -0.02em;
 }
 .brand:hover { text-decoration: none; }
+.brand-icon {
+  width: 42px;
+  height: 28px;
+  flex: none;
+}
+.brand-icon .seal-up { display: none; }
+.brand:hover .seal-rest,
+.brand:focus-visible .seal-rest { display: none; }
+.brand:hover .seal-up,
+.brand:focus-visible .seal-up { display: inline; }
+.brand:hover .brand-icon,
+.brand:focus-visible .brand-icon { animation: seal-hop 0.35s ease-out; }
+@keyframes seal-hop {
+  40% { transform: translateY(-3px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand:hover .brand-icon,
+  .brand:focus-visible .brand-icon { animation: none; }
+}
 
 .theme-toggle {
   width: 40px;
@@ -91,59 +121,128 @@ a:hover { text-decoration: underline; }
 .container {
   max-width: 704px;
   margin: 0 auto;
-  padding: 24px 16px 32px;
+  padding: 8px 16px 32px;
 }
 
 section { padding: 24px 0; border-bottom: 1px solid var(--divider); }
 section:last-of-type { border-bottom: 0; }
-section.profile { border-bottom: 0; }
 
+/* Section titles: colored-pencil shading behind the lower ~70% of the text */
 .section-title {
+  position: relative;
+  isolation: isolate;
   display: inline-block;
   margin: 0 0 16px;
-  font-size: 20px;
+  padding: 0 4px;
+  font-size: 23px;
   font-weight: 700;
-  text-decoration: underline;
-  text-decoration-color: var(--underline);
-  text-decoration-thickness: 4px;
-  text-underline-offset: 6px;
+  line-height: 1.25;
+}
+/* The stroke is painted behind the text (z-index -1), so letters are never covered */
+.section-title::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -2px;
+  right: -6px;
+  bottom: 0.16em;  /* just under the baseline */
+  height: 0.68em;  /* up to ~70% of the letter height */
+  background: var(--highlight);
+  -webkit-mask: var(--pencil) center / 100% 100% no-repeat;
+          mask: var(--pencil) center / 100% 100% no-repeat;
+}
+/* Three hand-shaded colored-pencil drawings, rotated across sections */
+.section-title { --pencil: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 280 40' preserveAspectRatio='none'%3E%3Cfilter id='g' x='0' y='0' width='100%' height='100%'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='3' result='n'/%3E%3CfeColorMatrix in='n' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.1 1.3' result='a'/%3E%3CfeComposite in='SourceGraphic' in2='a' operator='in' result='t'/%3E%3CfeDisplacementMap in='t' in2='n' scale='2'/%3E%3C/filter%3E%3Cg filter='url(%23g)' fill='none' stroke='black' stroke-linecap='round'%3E%3Cpath d='M-1.1 35.8Q-0.9 18.3 8.0 6.6' stroke-width='6.0' opacity='0.58'/%3E%3Cpath d='M8.0 6.6L14.0 31.1' stroke-width='4.2' opacity='0.49'/%3E%3Cpath d='M2.7 35.2Q11.6 18.8 17.2 7.7' stroke-width='5.7' opacity='0.75'/%3E%3Cpath d='M17.2 7.7L18.4 36.3' stroke-width='3.4' opacity='0.59'/%3E%3Cpath d='M9.2 37.4Q18.3 23.5 18.6 5.0' stroke-width='3.5' opacity='0.52'/%3E%3Cpath d='M18.6 5.0L24.4 30.7' stroke-width='3.7' opacity='0.42'/%3E%3Cpath d='M14.2 35.7Q21.7 25.0 25.6 9.1' stroke-width='6.0' opacity='0.95'/%3E%3Cpath d='M21.5 35.6Q26.0 23.5 36.4 7.4' stroke-width='5.1' opacity='0.59'/%3E%3Cpath d='M36.4 7.4L41.7 37.9' stroke-width='2.6' opacity='0.62'/%3E%3Cpath d='M25.2 38.0Q33.1 17.0 38.7 1.4' stroke-width='5.6' opacity='0.62'/%3E%3Cpath d='M30.7 31.6Q30.3 17.2 39.1 6.4' stroke-width='4.5' opacity='0.76'/%3E%3Cpath d='M39.1 6.4L40.4 36.3' stroke-width='3.1' opacity='0.68'/%3E%3Cpath d='M35.6 36.2Q41.6 22.0 46.4 6.4' stroke-width='6.3' opacity='0.70'/%3E%3Cpath d='M39.8 35.2Q42.8 20.0 55.6 5.9' stroke-width='5.1' opacity='0.46'/%3E%3Cpath d='M43.1 36.4Q50.3 21.7 53.2 4.2' stroke-width='3.3' opacity='0.48'/%3E%3Cpath d='M47.4 33.6Q51.3 18.1 58.9 4.3' stroke-width='5.2' opacity='0.60'/%3E%3Cpath d='M58.9 4.3L63.8 25.3' stroke-width='3.6' opacity='0.59'/%3E%3Cpath d='M51.5 32.5Q57.3 16.3 59.1 4.9' stroke-width='4.3' opacity='0.62'/%3E%3Cpath d='M58.8 36.2Q62.6 20.9 67.5 9.0' stroke-width='3.6' opacity='0.71'/%3E%3Cpath d='M67.5 9.0L72.5 35.9' stroke-width='2.8' opacity='0.41'/%3E%3Cpath d='M65.0 32.0Q72.3 16.5 73.8 3.6' stroke-width='4.3' opacity='0.66'/%3E%3Cpath d='M72.6 38.5Q80.0 23.3 77.6 8.9' stroke-width='6.3' opacity='0.91'/%3E%3Cpath d='M77.6 8.9L82.4 35.9' stroke-width='3.8' opacity='0.51'/%3E%3Cpath d='M77.3 35.7Q83.3 16.9 83.0 3.6' stroke-width='6.2' opacity='0.80'/%3E%3Cpath d='M84.8 37.0Q85.4 20.7 89.9 2.5' stroke-width='4.9' opacity='0.66'/%3E%3Cpath d='M89.5 34.8Q95.2 19.6 104.0 8.0' stroke-width='5.0' opacity='0.86'/%3E%3Cpath d='M104.0 8.0L108.9 37.0' stroke-width='4.1' opacity='0.63'/%3E%3Cpath d='M101.6 33.2Q104.7 17.8 107.2 3.4' stroke-width='4.8' opacity='0.84'/%3E%3Cpath d='M107.2 3.4L108.5 26.6' stroke-width='2.7' opacity='0.33'/%3E%3Cpath d='M108.9 33.5Q112.7 19.6 119.4 3.8' stroke-width='5.1' opacity='0.63'/%3E%3Cpath d='M119.4 3.8L122.1 26.6' stroke-width='3.6' opacity='0.59'/%3E%3Cpath d='M112.3 35.8Q115.7 23.7 121.4 8.0' stroke-width='5.3' opacity='0.67'/%3E%3Cpath d='M121.4 8.0L124.9 34.1' stroke-width='3.3' opacity='0.58'/%3E%3Cpath d='M116.5 31.6Q122.1 20.5 129.2 4.8' stroke-width='6.3' opacity='0.64'/%3E%3Cpath d='M120.8 37.5Q127.9 24.0 127.2 7.0' stroke-width='5.4' opacity='0.82'/%3E%3Cpath d='M126.8 37.2Q126.0 16.9 133.4 1.4' stroke-width='6.1' opacity='0.54'/%3E%3Cpath d='M133.4 1.4L138.6 26.6' stroke-width='4.2' opacity='0.57'/%3E%3Cpath d='M134.5 31.3Q141.5 20.9 148.3 7.9' stroke-width='3.6' opacity='0.82'/%3E%3Cpath d='M145.2 32.9Q149.7 18.5 159.3 2.6' stroke-width='5.7' opacity='0.65'/%3E%3Cpath d='M159.3 2.6L162.3 29.6' stroke-width='3.3' opacity='0.33'/%3E%3Cpath d='M153.0 32.3Q162.2 20.8 166.2 7.2' stroke-width='4.9' opacity='0.69'/%3E%3Cpath d='M156.8 38.3Q162.8 23.3 170.0 5.7' stroke-width='3.8' opacity='0.58'/%3E%3Cpath d='M170.0 5.7L173.9 29.1' stroke-width='2.9' opacity='0.58'/%3E%3Cpath d='M161.3 37.8Q163.7 20.4 170.8 6.3' stroke-width='3.3' opacity='0.69'/%3E%3Cpath d='M170.8 6.3L172.7 29.7' stroke-width='3.1' opacity='0.61'/%3E%3Cpath d='M169.2 34.7Q178.2 22.0 180.8 8.5' stroke-width='4.8' opacity='0.81'/%3E%3Cpath d='M175.9 32.8Q183.1 19.0 186.0 3.1' stroke-width='6.4' opacity='0.88'/%3E%3Cpath d='M186.0 3.1L188.0 28.4' stroke-width='2.8' opacity='0.58'/%3E%3Cpath d='M183.4 33.5Q192.9 16.7 197.9 4.8' stroke-width='3.5' opacity='0.87'/%3E%3Cpath d='M197.9 4.8L200.7 32.5' stroke-width='3.8' opacity='0.30'/%3E%3Cpath d='M188.6 35.7Q191.1 22.9 195.9 9.6' stroke-width='3.6' opacity='0.59'/%3E%3Cpath d='M196.0 38.5Q201.7 23.0 202.1 4.4' stroke-width='4.2' opacity='0.79'/%3E%3Cpath d='M200.3 36.4Q204.2 21.1 215.9 5.8' stroke-width='4.4' opacity='0.81'/%3E%3Cpath d='M204.2 32.4Q211.8 18.5 216.2 9.0' stroke-width='6.3' opacity='0.52'/%3E%3Cpath d='M216.2 9.0L220.8 32.8' stroke-width='3.6' opacity='0.56'/%3E%3Cpath d='M208.8 36.7Q212.1 23.7 214.5 7.8' stroke-width='4.4' opacity='0.58'/%3E%3Cpath d='M214.5 7.8L219.9 25.5' stroke-width='3.5' opacity='0.40'/%3E%3Cpath d='M213.6 35.3Q216.8 23.7 223.0 7.9' stroke-width='3.6' opacity='0.59'/%3E%3Cpath d='M223.0 7.9L224.6 35.1' stroke-width='3.9' opacity='0.37'/%3E%3Cpath d='M218.6 37.0Q222.1 21.0 232.6 6.3' stroke-width='3.8' opacity='0.71'/%3E%3Cpath d='M222.9 37.4Q230.1 22.5 228.2 9.0' stroke-width='5.0' opacity='0.74'/%3E%3Cpath d='M229.3 34.9Q238.8 17.7 243.8 6.4' stroke-width='5.7' opacity='0.78'/%3E%3Cpath d='M234.6 31.3Q241.5 18.1 245.5 5.5' stroke-width='5.1' opacity='0.93'/%3E%3Cpath d='M241.6 33.9Q240.2 18.7 247.2 3.1' stroke-width='6.3' opacity='0.61'/%3E%3Cpath d='M245.3 38.4Q253.5 22.0 256.9 7.4' stroke-width='5.9' opacity='0.92'/%3E%3Cpath d='M252.1 31.3Q252.2 14.5 258.3 1.7' stroke-width='4.8' opacity='0.80'/%3E%3Cpath d='M258.3 37.1Q260.2 23.2 268.4 4.6' stroke-width='5.6' opacity='0.63'/%3E%3Cpath d='M268.4 4.6L272.1 32.8' stroke-width='2.9' opacity='0.30'/%3E%3Cpath d='M265.2 32.6Q266.9 17.1 275.3 2.9' stroke-width='3.8' opacity='0.46'/%3E%3Cpath d='M275.3 2.9L277.1 31.4' stroke-width='2.5' opacity='0.31'/%3E%3Cpath d='M270.3 34.2Q268.3 22.2 275.8 4.6' stroke-width='3.9' opacity='0.50'/%3E%3Cpath d='M276.4 31.4Q277.3 21.2 282.7 7.5' stroke-width='4.7' opacity='0.92'/%3E%3Cpath d='M282.7 7.5L285.0 28.5' stroke-width='4.1' opacity='0.55'/%3E%3Cpath d='M13 25 T35 25 T56 33 T81 29 T121 34 T142 30 T186 27 T227 28' stroke-width='3.3' opacity='0.34'/%3E%3Cpath d='M17 25 T60 24 T86 25 T113 27 T148 24 T180 27 T200 27 T237 22' stroke-width='3.2' opacity='0.52'/%3E%3C/g%3E%3C/svg%3E"); }
+section:nth-of-type(3n+2) .section-title { --pencil: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 280 40' preserveAspectRatio='none'%3E%3Cfilter id='g' x='0' y='0' width='100%' height='100%'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='11' result='n'/%3E%3CfeColorMatrix in='n' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.1 1.3' result='a'/%3E%3CfeComposite in='SourceGraphic' in2='a' operator='in' result='t'/%3E%3CfeDisplacementMap in='t' in2='n' scale='2'/%3E%3C/filter%3E%3Cg filter='url(%23g)' fill='none' stroke='black' stroke-linecap='round'%3E%3Cpath d='M0.6 34.7Q9.1 18.3 15.8 5.6' stroke-width='4.9' opacity='0.76'/%3E%3Cpath d='M5.1 36.5Q16.9 21.8 19.0 1.4' stroke-width='5.4' opacity='0.76'/%3E%3Cpath d='M19.0 1.4L20.1 31.9' stroke-width='2.5' opacity='0.38'/%3E%3Cpath d='M8.3 37.7Q14.6 21.7 18.1 5.7' stroke-width='5.4' opacity='0.68'/%3E%3Cpath d='M18.1 5.7L24.1 37.9' stroke-width='4.2' opacity='0.58'/%3E%3Cpath d='M12.4 37.1Q18.8 20.2 18.2 4.6' stroke-width='6.4' opacity='0.87'/%3E%3Cpath d='M18.2 4.6L20.3 36.8' stroke-width='3.4' opacity='0.69'/%3E%3Cpath d='M15.8 33.2Q20.9 20.3 29.4 1.8' stroke-width='5.7' opacity='0.51'/%3E%3Cpath d='M29.4 1.8L30.9 25.8' stroke-width='4.1' opacity='0.37'/%3E%3Cpath d='M21.0 32.0Q23.7 18.9 34.1 6.8' stroke-width='3.9' opacity='0.58'/%3E%3Cpath d='M25.6 34.2Q30.6 19.0 32.9 8.7' stroke-width='6.5' opacity='0.56'/%3E%3Cpath d='M32.9 8.7L37.7 29.3' stroke-width='3.0' opacity='0.33'/%3E%3Cpath d='M31.5 34.0Q41.9 19.4 43.1 5.1' stroke-width='5.1' opacity='0.88'/%3E%3Cpath d='M43.1 5.1L44.9 36.8' stroke-width='4.1' opacity='0.40'/%3E%3Cpath d='M38.2 38.6Q42.8 23.3 45.3 8.9' stroke-width='3.5' opacity='0.47'/%3E%3Cpath d='M44.7 35.8Q48.5 21.0 58.8 3.6' stroke-width='3.4' opacity='0.56'/%3E%3Cpath d='M50.8 32.6Q56.0 16.6 65.9 1.1' stroke-width='3.4' opacity='0.54'/%3E%3Cpath d='M65.9 1.1L69.7 26.7' stroke-width='3.2' opacity='0.66'/%3E%3Cpath d='M57.0 32.1Q57.9 19.2 68.5 1.3' stroke-width='5.5' opacity='0.93'/%3E%3Cpath d='M68.5 1.3L72.7 31.3' stroke-width='3.9' opacity='0.43'/%3E%3Cpath d='M60.4 38.2Q69.0 24.7 73.5 7.6' stroke-width='6.2' opacity='0.63'/%3E%3Cpath d='M67.8 37.9Q75.9 21.3 81.5 6.2' stroke-width='5.1' opacity='0.75'/%3E%3Cpath d='M81.5 6.2L85.7 37.9' stroke-width='4.2' opacity='0.59'/%3E%3Cpath d='M74.5 37.7Q81.9 16.9 84.3 1.8' stroke-width='5.2' opacity='0.69'/%3E%3Cpath d='M84.3 1.8L88.8 31.5' stroke-width='3.7' opacity='0.67'/%3E%3Cpath d='M77.5 32.6Q87.8 18.5 90.0 2.5' stroke-width='4.7' opacity='0.90'/%3E%3Cpath d='M90.0 2.5L94.3 27.6' stroke-width='3.3' opacity='0.62'/%3E%3Cpath d='M84.9 33.5Q90.6 19.9 96.3 2.2' stroke-width='6.0' opacity='0.81'/%3E%3Cpath d='M88.8 32.7Q94.0 18.7 96.8 4.7' stroke-width='4.2' opacity='0.87'/%3E%3Cpath d='M92.1 31.3Q100.1 18.2 106.7 7.4' stroke-width='5.8' opacity='0.46'/%3E%3Cpath d='M106.7 7.4L110.0 25.3' stroke-width='4.1' opacity='0.39'/%3E%3Cpath d='M95.4 36.0Q103.4 24.2 105.3 6.9' stroke-width='5.5' opacity='0.55'/%3E%3Cpath d='M98.4 32.4Q103.3 19.1 111.3 3.5' stroke-width='4.9' opacity='0.76'/%3E%3Cpath d='M105.4 38.5Q104.7 22.7 111.3 7.5' stroke-width='5.3' opacity='0.90'/%3E%3Cpath d='M111.3 7.5L115.2 36.4' stroke-width='4.1' opacity='0.68'/%3E%3Cpath d='M111.6 37.5Q120.3 20.4 124.6 6.8' stroke-width='6.2' opacity='0.94'/%3E%3Cpath d='M118.6 37.8Q121.9 20.6 133.6 4.1' stroke-width='5.0' opacity='0.83'/%3E%3Cpath d='M131.6 32.4Q141.4 16.0 145.4 4.0' stroke-width='3.7' opacity='0.71'/%3E%3Cpath d='M138.1 38.6Q140.5 20.3 148.5 1.8' stroke-width='4.2' opacity='0.81'/%3E%3Cpath d='M145.3 34.0Q153.5 19.6 153.7 8.6' stroke-width='6.0' opacity='0.93'/%3E%3Cpath d='M149.3 35.8Q159.3 18.6 159.8 1.2' stroke-width='4.5' opacity='0.85'/%3E%3Cpath d='M155.8 34.3Q165.5 20.6 166.7 9.6' stroke-width='4.8' opacity='0.51'/%3E%3Cpath d='M163.3 32.5Q171.8 17.3 171.8 6.6' stroke-width='5.8' opacity='0.46'/%3E%3Cpath d='M171.8 6.6L173.9 33.9' stroke-width='3.1' opacity='0.44'/%3E%3Cpath d='M166.8 35.1Q166.9 19.4 173.1 3.3' stroke-width='4.6' opacity='0.64'/%3E%3Cpath d='M170.6 36.1Q180.1 21.6 182.5 5.8' stroke-width='6.0' opacity='0.57'/%3E%3Cpath d='M178.1 38.4Q187.3 23.0 186.6 3.0' stroke-width='3.6' opacity='0.57'/%3E%3Cpath d='M181.6 37.3Q185.4 20.8 191.2 2.1' stroke-width='3.3' opacity='0.55'/%3E%3Cpath d='M189.4 37.1Q196.6 19.4 200.0 5.5' stroke-width='3.4' opacity='0.50'/%3E%3Cpath d='M200.0 5.5L203.7 31.7' stroke-width='3.6' opacity='0.36'/%3E%3Cpath d='M193.4 38.4Q197.0 22.8 209.3 1.9' stroke-width='4.7' opacity='0.83'/%3E%3Cpath d='M209.3 1.9L212.7 31.7' stroke-width='3.3' opacity='0.54'/%3E%3Cpath d='M206.0 34.6Q208.5 19.3 212.9 7.7' stroke-width='3.7' opacity='0.71'/%3E%3Cpath d='M212.9 7.7L218.4 35.4' stroke-width='3.9' opacity='0.64'/%3E%3Cpath d='M211.0 38.9Q213.8 26.0 221.5 8.2' stroke-width='5.7' opacity='0.84'/%3E%3Cpath d='M218.5 37.1Q223.8 23.8 231.1 7.9' stroke-width='3.4' opacity='0.62'/%3E%3Cpath d='M229.2 32.9Q236.8 20.2 241.1 9.5' stroke-width='5.4' opacity='0.73'/%3E%3Cpath d='M237.2 37.1Q238.8 24.1 249.9 9.8' stroke-width='5.6' opacity='0.58'/%3E%3Cpath d='M247.2 33.0Q250.8 21.1 253.3 9.2' stroke-width='6.4' opacity='0.73'/%3E%3Cpath d='M254.3 37.1Q264.3 17.2 265.8 1.4' stroke-width='4.8' opacity='0.53'/%3E%3Cpath d='M257.6 35.2Q261.0 19.5 267.2 6.4' stroke-width='5.4' opacity='0.73'/%3E%3Cpath d='M267.2 6.4L271.8 28.8' stroke-width='2.4' opacity='0.40'/%3E%3Cpath d='M267.3 38.2Q267.5 25.9 276.6 7.7' stroke-width='6.3' opacity='0.49'/%3E%3Cpath d='M11 17 T42 18 T78 16 T109 10 T142 14 T179 12 T213 18' stroke-width='3.3' opacity='0.48'/%3E%3Cpath d='M-2 18 T34 12 T71 16 T107 12 T133 19 T175 10 T202 16 T225 10 T247 15' stroke-width='2.7' opacity='0.35'/%3E%3C/g%3E%3C/svg%3E"); }
+section:nth-of-type(3n) .section-title { --pencil: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 280 40' preserveAspectRatio='none'%3E%3Cfilter id='g' x='0' y='0' width='100%' height='100%'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='29' result='n'/%3E%3CfeColorMatrix in='n' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.1 1.3' result='a'/%3E%3CfeComposite in='SourceGraphic' in2='a' operator='in' result='t'/%3E%3CfeDisplacementMap in='t' in2='n' scale='2'/%3E%3C/filter%3E%3Cg filter='url(%23g)' fill='none' stroke='black' stroke-linecap='round'%3E%3Cpath d='M1.4 33.3Q7.0 18.9 15.7 5.6' stroke-width='6.4' opacity='0.50'/%3E%3Cpath d='M6.1 35.9Q12.7 20.0 14.8 4.8' stroke-width='3.8' opacity='0.67'/%3E%3Cpath d='M11.9 33.4Q15.4 19.0 24.4 5.6' stroke-width='5.8' opacity='0.71'/%3E%3Cpath d='M17.9 35.9Q18.6 24.6 27.3 8.0' stroke-width='4.4' opacity='0.52'/%3E%3Cpath d='M27.3 8.0L30.0 25.9' stroke-width='3.2' opacity='0.47'/%3E%3Cpath d='M23.2 33.6Q31.3 24.0 35.5 8.9' stroke-width='5.6' opacity='0.93'/%3E%3Cpath d='M35.5 8.9L37.9 37.6' stroke-width='2.4' opacity='0.67'/%3E%3Cpath d='M26.9 38.7Q36.7 25.3 42.0 8.8' stroke-width='4.2' opacity='0.45'/%3E%3Cpath d='M34.6 32.4Q34.5 15.9 39.7 5.0' stroke-width='3.8' opacity='0.70'/%3E%3Cpath d='M39.7 5.0L41.3 27.2' stroke-width='2.5' opacity='0.61'/%3E%3Cpath d='M38.6 32.9Q49.8 20.0 53.3 4.0' stroke-width='5.2' opacity='0.85'/%3E%3Cpath d='M45.1 33.6Q51.7 17.3 50.7 3.6' stroke-width='5.4' opacity='0.67'/%3E%3Cpath d='M50.7 3.6L54.2 36.6' stroke-width='3.8' opacity='0.46'/%3E%3Cpath d='M49.8 39.0Q60.2 23.9 61.9 3.9' stroke-width='4.7' opacity='0.56'/%3E%3Cpath d='M61.9 3.9L67.5 27.3' stroke-width='3.8' opacity='0.56'/%3E%3Cpath d='M53.0 35.4Q55.4 21.4 58.5 9.7' stroke-width='3.6' opacity='0.60'/%3E%3Cpath d='M58.5 9.7L60.1 34.1' stroke-width='3.7' opacity='0.59'/%3E%3Cpath d='M57.2 34.0Q57.0 19.5 62.3 8.4' stroke-width='5.3' opacity='0.58'/%3E%3Cpath d='M62.3 8.4L65.3 28.9' stroke-width='3.8' opacity='0.59'/%3E%3Cpath d='M65.1 38.9Q71.6 21.9 72.9 8.2' stroke-width='3.6' opacity='0.59'/%3E%3Cpath d='M69.9 33.3Q79.6 18.9 83.0 2.0' stroke-width='5.9' opacity='0.82'/%3E%3Cpath d='M83.0 2.0L87.3 29.8' stroke-width='4.3' opacity='0.35'/%3E%3Cpath d='M74.7 32.4Q78.9 19.5 88.5 1.1' stroke-width='5.7' opacity='0.80'/%3E%3Cpath d='M88.5 1.1L90.6 30.8' stroke-width='3.5' opacity='0.55'/%3E%3Cpath d='M87.9 33.5Q98.0 16.9 100.7 3.7' stroke-width='4.9' opacity='0.89'/%3E%3Cpath d='M92.1 33.4Q99.0 23.1 102.3 7.9' stroke-width='4.6' opacity='0.52'/%3E%3Cpath d='M102.3 7.9L107.0 34.1' stroke-width='3.8' opacity='0.46'/%3E%3Cpath d='M95.4 31.9Q100.4 17.3 109.3 6.6' stroke-width='5.8' opacity='0.89'/%3E%3Cpath d='M109.3 6.6L111.1 31.0' stroke-width='2.6' opacity='0.68'/%3E%3Cpath d='M107.0 39.0Q111.6 24.7 112.0 7.1' stroke-width='5.8' opacity='0.75'/%3E%3Cpath d='M110.5 36.9Q112.9 22.7 123.6 6.8' stroke-width='3.5' opacity='0.89'/%3E%3Cpath d='M123.6 6.8L125.9 31.9' stroke-width='4.2' opacity='0.56'/%3E%3Cpath d='M117.1 33.9Q118.6 20.0 125.8 8.2' stroke-width='4.1' opacity='0.57'/%3E%3Cpath d='M125.8 8.2L128.7 27.3' stroke-width='2.9' opacity='0.35'/%3E%3Cpath d='M123.6 35.8Q133.2 20.5 133.5 9.8' stroke-width='6.3' opacity='0.85'/%3E%3Cpath d='M133.5 9.8L135.5 31.5' stroke-width='3.0' opacity='0.42'/%3E%3Cpath d='M129.3 34.4Q136.2 16.6 134.7 3.0' stroke-width='3.6' opacity='0.63'/%3E%3Cpath d='M134.7 3.0L139.8 25.5' stroke-width='4.4' opacity='0.54'/%3E%3Cpath d='M133.6 37.1Q134.9 20.3 141.0 5.9' stroke-width='3.3' opacity='0.49'/%3E%3Cpath d='M141.1 36.2Q148.4 19.0 149.9 5.4' stroke-width='4.5' opacity='0.92'/%3E%3Cpath d='M149.9 5.4L154.4 30.8' stroke-width='3.4' opacity='0.63'/%3E%3Cpath d='M147.0 33.6Q149.3 21.8 154.9 4.1' stroke-width='3.7' opacity='0.88'/%3E%3Cpath d='M152.4 38.5Q152.4 18.4 157.7 4.3' stroke-width='5.8' opacity='0.46'/%3E%3Cpath d='M160.3 31.4Q173.2 15.0 176.1 4.1' stroke-width='4.2' opacity='0.63'/%3E%3Cpath d='M165.2 34.0Q173.4 20.9 173.9 7.2' stroke-width='4.1' opacity='0.93'/%3E%3Cpath d='M173.9 7.2L178.4 34.6' stroke-width='3.5' opacity='0.41'/%3E%3Cpath d='M171.8 34.6Q179.0 19.2 187.0 6.7' stroke-width='6.0' opacity='0.76'/%3E%3Cpath d='M187.0 6.7L188.7 33.9' stroke-width='2.4' opacity='0.61'/%3E%3Cpath d='M185.2 38.2Q187.6 21.1 190.7 7.0' stroke-width='5.6' opacity='0.53'/%3E%3Cpath d='M192.1 38.1Q198.4 17.3 207.8 1.1' stroke-width='4.6' opacity='0.88'/%3E%3Cpath d='M196.7 33.5Q198.2 21.1 209.0 4.8' stroke-width='3.7' opacity='0.55'/%3E%3Cpath d='M201.6 31.1Q209.0 20.8 212.3 5.6' stroke-width='5.4' opacity='0.95'/%3E%3Cpath d='M208.5 32.5Q216.3 22.4 223.4 9.3' stroke-width='5.5' opacity='0.53'/%3E%3Cpath d='M220.1 35.3Q218.4 21.6 225.7 5.9' stroke-width='6.4' opacity='0.73'/%3E%3Cpath d='M225.7 5.9L229.1 29.8' stroke-width='3.5' opacity='0.60'/%3E%3Cpath d='M224.3 34.4Q230.5 16.8 240.2 4.9' stroke-width='5.5' opacity='0.80'/%3E%3Cpath d='M230.5 33.2Q238.6 20.2 240.8 2.8' stroke-width='4.3' opacity='0.83'/%3E%3Cpath d='M240.8 2.8L246.2 32.5' stroke-width='4.3' opacity='0.68'/%3E%3Cpath d='M236.4 36.9Q240.7 19.9 247.9 3.9' stroke-width='4.1' opacity='0.48'/%3E%3Cpath d='M243.1 31.9Q250.2 17.9 254.8 3.8' stroke-width='6.1' opacity='0.59'/%3E%3Cpath d='M254.8 3.8L258.9 32.4' stroke-width='2.6' opacity='0.39'/%3E%3Cpath d='M249.0 36.4Q254.2 22.9 256.2 6.6' stroke-width='4.1' opacity='0.65'/%3E%3Cpath d='M256.2 6.6L260.8 25.6' stroke-width='3.4' opacity='0.36'/%3E%3Cpath d='M253.9 36.0Q262.0 16.9 267.0 3.4' stroke-width='3.8' opacity='0.91'/%3E%3Cpath d='M267.0 3.4L269.0 25.0' stroke-width='3.4' opacity='0.54'/%3E%3Cpath d='M257.9 32.4Q259.4 18.7 263.4 2.9' stroke-width='4.4' opacity='0.50'/%3E%3Cpath d='M262.9 33.8Q266.2 18.5 275.4 6.7' stroke-width='6.1' opacity='0.47'/%3E%3Cpath d='M275.4 6.7L277.6 37.7' stroke-width='3.7' opacity='0.41'/%3E%3Cpath d='M268.1 32.7Q272.2 19.2 278.5 6.9' stroke-width='3.9' opacity='0.86'/%3E%3Cpath d='M274.2 37.5Q279.7 21.0 284.0 2.4' stroke-width='5.4' opacity='0.60'/%3E%3Cpath d='M2 30 T45 26 T66 29 T101 25 T138 29 T175 22 T220 27' stroke-width='2.6' opacity='0.34'/%3E%3Cpath d='M12 21 T51 23 T82 22 T113 28 T156 26 T198 23 T230 28 T273 29' stroke-width='2.5' opacity='0.44'/%3E%3C/g%3E%3C/svg%3E"); }
+
+/* ---------- Hero ---------- */
+section.hero { padding: 0; border-bottom: 0; }
+.hero-inner {
+  /* Profile photo size, and how much of it hangs below the banner */
+  --photo: 290px;
+  --photo-below: 0.72;
+  max-width: 704px;
+  margin: 0 auto;
+  padding: 0 16px;
+  position: relative;
+}
+/* Crop toward the lower half of the photo so the icebergs and sea show */
+.hero-banner {
+  background: #2b63b8 url("images/background.jpeg") center 70% / cover no-repeat;
+}
+.hero-banner .hero-inner {
+  height: clamp(240px, 26vw, 340px);
+  display: flex;
+  align-items: flex-end;
+}
+/* Name sits over the dark sea, left of the profile photo */
+.hero-name {
+  margin: 0 0 28px;
+  max-width: calc(100% - var(--photo) - 30px);
+  color: #fff;
+  font-size: 42px;
+  line-height: 1.15;
+  text-shadow: 0 2px 10px rgba(0, 20, 60, 0.5);
 }
 
-/* ---------- Profile ---------- */
-.profile {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 24px;
+/* Circle photo straddles the bottom edge of the banner, mostly hanging below it
+   so the photo + buttons end close to where the About text ends */
+.profile-img {
+  position: absolute;
+  right: 16px;
+  bottom: 0;
+  transform: translateY(calc(var(--photo-below) * 100%));
+  width: var(--photo);
+  height: var(--photo);
+  object-fit: cover;
+  object-position: 50% 55%;
+  border-radius: 50%;
+  border: 5px solid var(--bg);
+  background: var(--bg);
 }
-.profile h1 { margin: 0 0 16px; font-size: 36px; line-height: 1.2; }
-.position { margin: 0; font-weight: 700; font-size: 15px; }
-.affiliation { margin: 0 0 12px; font-size: 15px; }
+
+/* Below the banner: Hi + About me on the left, buttons under the photo on the right */
+.hero-below {
+  display: grid;
+  grid-template-columns: 1fr var(--photo);
+  gap: 24px;
+  align-items: start;
+}
+.hero-below::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 0;
+  border-bottom: 1px solid var(--divider);
+}
+.hero-about { padding: 24px 0; }
+.hero-below .buttons {
+  flex-wrap: nowrap;
+  justify-content: center;
+  padding-top: calc(var(--photo) * var(--photo-below) + 14px); /* part of photo below banner + gap */
+}
 
 .buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+/* One button style for E-mail / Google Scholar and the photo tabs */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 10px;
+  padding: 5px 13px;
+  white-space: nowrap;
+  font: inherit;
   font-size: 13px;
   font-weight: 600;
-  color: var(--text);
-  background: var(--btn-bg);
-  border: 1px solid var(--btn-border);
-  border-radius: 8px;
+  line-height: 1.5;
+  color: var(--accent-fg);
+  background: var(--accent);
+  border: 1.5px solid var(--accent);
+  border-radius: 14px;
+  cursor: pointer;
 }
-.btn:hover { text-decoration: none; border-color: var(--link); }
-
-.profile-img {
-  width: 120px;
-  height: 135px;
-  flex-shrink: 0;
-  object-fit: cover;
-  border-radius: 16px;
-  border: 2px solid var(--card-border);
-}
-.profile-img.empty { display: none; }
+.btn:hover { text-decoration: none; filter: brightness(1.1); }
 
 /* ---------- Text ---------- */
 .paragraph { margin: 0 0 8px; text-align: justify; text-indent: 1em; }
@@ -154,15 +253,31 @@ section.profile { border-bottom: 0; }
 .timeline .date { flex: 0 0 auto; min-width: 64px; font-weight: 700; white-space: nowrap; }
 
 /* ---------- Research card ---------- */
+/* Hand-drawn outline: slightly uneven corners on the main line,
+   plus a faint second pass drawn a little off, like a pen sketch */
 .paper {
+  position: relative;
   display: flex;
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  overflow: hidden;
-  margin-bottom: 16px;
+  border: 1.6px solid var(--sketch);
+  border-radius: 18px 9px 20px 10px / 10px 18px 9px 20px;
+  margin-bottom: 20px;
+}
+.paper::after {
+  content: "";
+  position: absolute;
+  inset: -3px -2px -2px -3px;
+  border: 1px solid var(--sketch);
+  border-radius: 10px 20px 9px 18px / 19px 9px 20px 10px;
+  opacity: 0.4;
+  transform: rotate(-0.25deg);
+  pointer-events: none;
 }
 .paper-thumb {
   flex: 0 0 250px;
+  overflow: hidden;
+  border-radius: inherit;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
   background: var(--thumb-bg);
   border-right: 1px solid var(--card-border);
   display: grid;
@@ -177,7 +292,57 @@ section.profile { border-bottom: 0; }
 .authors { margin: 0 0 6px; font-size: 13px; color: var(--muted); }
 .authors strong { color: var(--text); }
 .venue { margin: 0 0 6px; font-size: 13px; font-style: italic; color: var(--muted); }
-.links { margin: 0; font-size: 13px; }
+.paper-desc { margin: 10px 0 0; font-size: 14px; line-height: 1.5; }
+
+/* ---------- Photos (tabs + carousel) ---------- */
+.photo-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+/* Unselected tabs are the outlined version of .btn; the selected one is filled */
+.photo-tab:not(.active) { color: var(--accent); background: transparent; }
+.photo-tab:not(.active):hover { background: var(--btn-bg); filter: none; }
+
+/* Photo row spans the same width as the rest of the content;
+   the arrows sit outside it in the side margins */
+.carousel {
+  --per: 3;      /* photos visible at once */
+  --gap: 8px;
+  position: relative;
+}
+.carousel-viewport { overflow: hidden; }
+.photo-track {
+  display: flex;
+  gap: var(--gap);
+  transition: transform 0.35s ease;
+}
+.photo-track[hidden] { display: none; }
+.photo-track a {
+  flex: 0 0 calc((100% - var(--gap) * (var(--per) - 1)) / var(--per));
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--btn-bg);
+}
+.photo-track img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Hand-drawn arrows; the right one is the left one mirrored */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  color: var(--accent);
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.carousel-arrow.prev { left: -44px; }
+.carousel-arrow.next { right: -44px; }
+.carousel-arrow.next svg { transform: scaleX(-1); }
+.carousel-arrow:hover { filter: brightness(1.2); }
+.carousel-arrow:disabled { visibility: hidden; }
 
 /* ---------- Footer ---------- */
 .footer {
@@ -188,11 +353,62 @@ section.profile { border-bottom: 0; }
   padding: 32px 16px 48px;
 }
 
+/* ---------- Side navigation ---------- */
+/* Shown from 960px wide; hidden on tablets and phones */
+.toc { display: none; }
+section[id] { scroll-margin-top: 72px; } /* keep headings clear of the sticky navbar */
+
+@media (min-width: 960px) {
+  /* On medium screens, nudge the content column right so the nav fits on its left */
+  .container,
+  .hero-inner { margin-left: max(190px, calc((100% - 704px) / 2)); margin-right: auto; }
+
+  .toc {
+    display: block;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: max(16px, calc(50% - 560px));
+    width: 140px;
+    z-index: 5;
+  }
+  .toc ul { list-style: none; margin: 0; padding: 0 0 0 14px; border-left: 2px solid var(--divider); }
+  .toc li { margin: 4px 0; }
+  .toc a {
+    display: inline-block;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+    transition: font-size 0.2s ease, color 0.2s ease;
+  }
+  .toc a:hover { color: var(--accent); text-decoration: none; }
+  .toc a.active { color: var(--accent); font-size: 20px; font-weight: 700; }
+}
+
+/* ---------- Narrow screens: no room beside the photos, so arrows float over their edges ---------- */
+@media (max-width: 800px) {
+  .carousel-arrow { width: 32px; height: 32px; border-radius: 50%; background: rgba(255, 255, 255, 0.8); }
+  .carousel-arrow.prev { left: 4px; }
+  .carousel-arrow.next { right: 4px; }
+}
+
 /* ---------- Mobile ---------- */
 @media (max-width: 640px) {
-  .profile { flex-direction: column-reverse; align-items: center; text-align: center; }
-  .buttons { justify-content: center; }
+  .hero-banner .hero-inner { height: 220px; align-items: flex-start; justify-content: center; padding-top: 36px; }
+  .hero-name { max-width: 100%; margin: 0; font-size: 32px; text-align: center; }
+  .profile-img { width: 150px; height: 150px; right: 50%; transform: translate(50%, 50%); }
+  .hero-below { grid-template-columns: 1fr; gap: 0; }
+  .hero-below .buttons { order: -1; padding-top: 91px; }
   .paper { flex-direction: column; }
-  .paper-thumb { flex-basis: auto; border-right: 0; border-bottom: 1px solid var(--card-border); }
+  .paper-thumb {
+    flex-basis: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--card-border);
+    border-radius: inherit;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
   .timeline li { flex-direction: column; gap: 0; }
+  .carousel { --per: 2; }
 }

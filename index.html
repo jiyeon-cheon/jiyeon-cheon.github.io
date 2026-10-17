@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Jiyeon Cheon</title>
-  <meta name="description" content="Jiyeon Cheon's personal research homepage." />
+  <title>Ji-Yeon Cheon</title>
+  <meta name="description" content="Ji-Yeon Cheon's personal research homepage." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="images/weddell-seal.svg" />
   <link rel="stylesheet" href="style.css" />
   <!-- Apply saved theme before paint to avoid a flash -->
   <script>
@@ -21,7 +22,40 @@
 <body>
   <header class="navbar">
     <div class="navbar-inner">
-      <a class="brand" href="#">Jiyeon Cheon</a>
+      <a class="brand" href="#">
+        <!-- Weddell seal: resting pose, switches to the head-and-tail-up pose on hover -->
+        <svg class="brand-icon" viewBox="0 0 48 32" aria-hidden="true">
+          <defs>
+            <mask id="seal-rest-mask">
+              <rect width="48" height="32" fill="#fff"/>
+              <ellipse cx="3.6" cy="23.8" rx=".45" ry=".7" transform="rotate(-20 3.6 23.8)"/>
+              <circle cx="4.9" cy="24.4" r=".25"/><circle cx="5.7" cy="24.7" r=".25"/><circle cx="5.2" cy="25.3" r=".25"/>
+              <g fill="none" stroke="#000" stroke-width=".8" stroke-linecap="round">
+                <path d="M7.4 21.4Q8.5 22.3 9.6 21.5"/>
+                <path d="M3.1 26.2Q4.4 26.8 5.8 26.3"/>
+                <path d="M23 20.5C23.3 23.5 25 26 28 27.6"/>
+                <path d="M41.5 24.6 46.3 25"/>
+              </g>
+              <circle cx="20" cy="15.3" r="1"/><circle cx="25" cy="15" r=".8"/><circle cx="29" cy="18.5" r="1"/><circle cx="33.5" cy="21.6" r=".8"/><circle cx="16.5" cy="19" r=".7"/>
+            </mask>
+            <mask id="seal-up-mask">
+              <rect width="48" height="32" fill="#fff"/>
+              <ellipse cx="3.7" cy="8.8" rx=".55" ry=".85" transform="rotate(-20 3.7 8.8)"/>
+              <circle cx="5.3" cy="9.4" r=".3"/><circle cx="6.3" cy="9.7" r=".3"/><circle cx="5.7" cy="10.5" r=".3"/>
+              <circle cx="9.6" cy="6.9" r="1.1"/>
+              <g fill="none" stroke="#000" stroke-width=".8" stroke-linecap="round">
+                <path d="M3.2 11.5Q4.7 12.2 6.4 11.6"/>
+                <path d="M21 19.5C21.3 22.5 23 25.5 26 27.4"/>
+                <path d="M43 6.5 45.6 2.2"/>
+              </g>
+              <circle cx="17" cy="21" r="1"/><circle cx="27" cy="18.5" r=".8"/><circle cx="31" cy="20" r="1"/><circle cx="35" cy="16" r=".8"/>
+            </mask>
+          </defs>
+          <path class="seal-rest" mask="url(#seal-rest-mask)" fill="currentColor" d="M2.5 24.8C2.5 23.2 3.4 22.2 4.7 21.9C6 20.2 7.5 18.6 9.5 17.8C12.5 14 16 12 20 11.8C25 11.6 29 13 33 16.2C36 18.8 38.5 21 41 22.5C43 22.5 45.5 22 47 22.8C46.4 24.5 46.8 26 47.3 27.3C45 27.6 42.5 27 40.5 26.4C36 28.2 30 28.6 22 28.6H11C9.5 28.6 8.2 28.5 7 28.3C5.3 28.1 4 27.5 3.3 26.8C2.8 26.2 2.5 25.6 2.5 24.8Z"/>
+          <path class="seal-up" mask="url(#seal-up-mask)" fill="currentColor" d="M2.5 10C2.5 8.2 3.6 7 5.2 6.6C6.8 4.6 9 3.6 11.5 3.8C14.5 4 16 6.5 16 9.5C16 13 18 15.5 21 15.5C27 15.5 32 15 36 12C38 10.5 40 8 42 5.5C42.5 3.5 43 2 43.8 1.2C45 2 46.5 2.3 47.6 2.4C47 4.2 45.5 6.2 43.8 7.6C42 12.5 39 22 33 26C30 28 26 28.6 21 28.6H15C10 28.6 7.5 24 7.5 17C7.5 15 6.5 13.5 5.5 13C4 12.5 3.2 12 2.8 11.4C2.6 11 2.5 10.5 2.5 10Z"/>
+        </svg>
+        Ji-Yeon Cheon
+      </a>
       <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
         <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M21.4 13.7A9.5 9.5 0 0 1 10.3 2.6a.6.6 0 0 0-.8-.7A10.5 10.5 0 1 0 22.1 14.5a.6.6 0 0 0-.7-.8Z"/></svg>
         <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 1.5v2M12 20.5v2M1.5 12h2M20.5 12h2M4.6 4.6 6 6M18 18l1.4 1.4M4.6 19.4 6 18M18 6l1.4-1.4"/></g></svg>
@@ -29,54 +63,70 @@
     </div>
   </header>
 
-  <main class="container">
-    <!-- ========== Profile ========== -->
-    <section class="profile">
-      <div class="profile-text">
-        <h1>Jiyeon Cheon</h1>
-        <p class="position">Ph.D. Student</p>
-        <p class="affiliation">Your University</p>
-        <div class="buttons">
-          <a class="btn" href="mailto:your.email@example.com">
-            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm9 7.2L4 7.3V17h16V7.3l-8 4.9Zm0-2.3L19.2 7H4.8L12 9.9Z"/></svg>
-            E-mail
-          </a>
-          <a class="btn" href="https://github.com/" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5Z"/></svg>
-            GitHub
-          </a>
-          <a class="btn" href="https://scholar.google.com/" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M12 2 1 9l11 7 9-5.7V17h2V9L12 2Zm-6.5 11.2V17c0 1.7 2.9 4 6.5 4s6.5-2.3 6.5-4v-3.8L12 17.3l-6.5-4.1Z"/></svg>
-            Google Scholar
-          </a>
-        </div>
+  <!-- ========== Side navigation (wide screens only) ========== -->
+  <nav class="toc" aria-label="Sections">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#fieldwork">Fieldwork</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#photos">Photos</a></li>
+    </ul>
+  </nav>
+
+  <!-- ========== Hero: background image + name + profile photo ========== -->
+  <section class="hero" id="about">
+    <div class="hero-banner">
+      <div class="hero-inner">
+        <h1 class="hero-name">Ji-Yeon Cheon</h1>
+        <img class="profile-img" src="images/profile.jpeg" alt="Ji-Yeon Cheon" />
       </div>
-      <!-- Replace images/profile.jpg with your photo -->
-      <img class="profile-img" src="images/profile.jpg" alt="Jiyeon Cheon" onerror="this.classList.add('empty')" />
-    </section>
+    </div>
+    <div class="hero-inner hero-below">
+      <!-- ========== About me ========== -->
+      <div class="hero-about">
+        <p class="paragraph">
+          I'm a Ph.D. student in the
+          <a href="https://sees.snu.ac.kr" target="_blank" rel="noopener">Department of Earth and Environmental Sciences</a>
+          at Seoul National University, advised by
+          <a href="https://scholar.google.com/citations?user=G1wIkngAAAAJ&amp;hl=ko" target="_blank" rel="noopener">Dr. Won Young Lee</a> (KOPRI)
+          and <a href="https://sees.snu.ac.kr/research-faculty/faculty/fulltime?mode=view&amp;profidx=81" target="_blank" rel="noopener">Prof. Chung Yeon Hwang</a> (SNU).
+        </p>
+        <p class="paragraph">
+          I'm currently conducting my research at the Division of Glacier and Earth Sciences,
+          <a href="https://www.kopri.re.kr" target="_blank" rel="noopener">Korea Polar Research Institute (KOPRI)</a>.
+        </p>
+        <p class="paragraph">
+          My research focuses on the behavior of polar animals. By analyzing and understanding how
+          animals behave, I aim to provide the knowledge that helps people coexist with wildlife.
+        </p>
+      </div>
+      <div class="buttons">
+        <a class="btn" href="mailto:your.email@example.com">
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm9 7.2L4 7.3V17h16V7.3l-8 4.9Zm0-2.3L19.2 7H4.8L12 9.9Z"/></svg>
+          E-mail
+        </a>
+        <a class="btn" href="https://scholar.google.com/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M12 2 1 9l11 7 9-5.7V17h2V9L12 2Zm-6.5 11.2V17c0 1.7 2.9 4 6.5 4s6.5-2.3 6.5-4v-3.8L12 17.3l-6.5-4.1Z"/></svg>
+          Google Scholar
+        </a>
+      </div>
+    </div>
+  </section>
 
-    <!-- ========== About ========== -->
-    <section>
-      <h3 class="section-title">About me</h3>
-      <p class="paragraph">
-        I'm a Ph.D. student in the Department of ___ at ___, advised by
-        <a href="#">Prof. ___</a>. I received my bachelor's degree in ___ from ___.
-      </p>
-      <p class="paragraph">
-        My research focuses on ___. Write a sentence or two about your research goals here.
-      </p>
-    </section>
-
+  <main class="container">
     <!-- ========== News ========== -->
-    <section>
+    <section id="news">
       <h3 class="section-title">News</h3>
       <ul class="timeline">
-        <li><span class="date">2026.10</span><span>Launched my personal homepage.</span></li>
+        <li><span class="date">2026.10</span><span>My research was accepted to my first conference, SMM 2026. See you in Puerto Rico!</span></li>
       </ul>
     </section>
 
     <!-- ========== Research ========== -->
-    <section>
+    <section id="research">
       <h3 class="section-title">Research</h3>
       <!-- Copy this <article> block for each paper -->
       <article class="paper">
@@ -85,15 +135,24 @@
         </div>
         <div class="paper-body">
           <h4 class="paper-title">Paper Title Goes Here</h4>
-          <p class="authors"><strong>Jiyeon Cheon</strong>, Co-author A, Co-author B, Advisor</p>
+          <p class="authors"><strong>Ji-Yeon Cheon</strong>, Co-author A, Co-author B, Advisor</p>
           <p class="venue">Conference / Journal Name, 2026</p>
-          <p class="links"><a href="#">project page</a> / <a href="#">paper</a> / <a href="#">code</a></p>
+          <p class="paper-desc">One or two sentences describing what this paper is about and what you found.</p>
         </div>
       </article>
     </section>
 
+    <!-- ========== Fieldwork (expeditions / field surveys) ========== -->
+    <section id="fieldwork">
+      <h3 class="section-title">Fieldwork</h3>
+      <!-- Add one <li> per expedition: period, then place / target species / role -->
+      <ul class="timeline">
+        <li><span class="date">20XX.XX - 20XX.XX</span><span>Expedition name, Location (e.g. King Sejong Station, Antarctica) — what you surveyed</span></li>
+      </ul>
+    </section>
+
     <!-- ========== Education ========== -->
-    <section>
+    <section id="education">
       <h3 class="section-title">Education</h3>
       <ul class="timeline">
         <li><span class="date">20XX.XX - Present</span><span>Ph.D., Your University, Department, advised by <a href="#">Prof. ___</a></span></li>
@@ -102,11 +161,67 @@
     </section>
 
     <!-- ========== Experience ========== -->
-    <section>
+    <section id="experience">
       <h3 class="section-title">Experience</h3>
       <ul class="timeline">
         <li><span class="date">20XX.XX - 20XX.XX</span><span>Research Intern, <a href="#">Lab Name</a>, advised by <a href="#">Prof. ___</a></span></li>
       </ul>
+    </section>
+
+    <!-- ========== Photos ========== -->
+    <section id="photos">
+      <h3 class="section-title">Photos</h3>
+      <!-- To add a photo, put it in images/photos/ and copy an <a> line into the right group below -->
+      <div class="photo-tabs" role="tablist">
+        <button class="btn photo-tab active" type="button" data-set="kkuragii" aria-selected="true"><svg viewBox='0 0 24 24' width='14' height='14' aria-hidden='true'><g fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round'><circle cx='7.5' cy='7.5' r='2.8'/><circle cx='16.5' cy='7.5' r='2.8'/><path d='M4.8 11.2C3.2 12.8 3 15.6 4.7 17.3 6.6 19.2 9.4 19.8 12 19.8s5.4-.6 7.3-2.5c1.7-1.7 1.5-4.5-.1-6.1'/><path d='M9 14.6c1.8 1.2 4.2 1.2 6 0'/></g><circle cx='7.5' cy='7.5' r='1' fill='currentColor'/><circle cx='16.5' cy='7.5' r='1' fill='currentColor'/></svg>Kkuragii</button>
+        <button class="btn photo-tab" type="button" data-set="scuba" aria-selected="false"><svg viewBox='0 0 24 24' width='14' height='14' aria-hidden='true'><g fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 8.5h15v5a2 2 0 0 1-2 2h-3l-2.5-2-2.5 2H5a2 2 0 0 1-2-2z'/><path d='M21 4v10.5a5.5 5.5 0 0 1-5.5 5.5H13'/></g></svg>Scuba Diving</button>
+        <button class="btn photo-tab" type="button" data-set="animals" aria-selected="false"><svg viewBox='0 0 24 24' width='14' height='14' aria-hidden='true' fill='currentColor'><circle cx='5.5' cy='10.5' r='2'/><circle cx='9.3' cy='6' r='2'/><circle cx='14.7' cy='6' r='2'/><circle cx='18.5' cy='10.5' r='2'/><path d='M12 11.5c-3.1 0-5.6 3.6-5.6 5.8 0 1.8 1.4 2.7 3 2.7 1.1 0 1.7-.6 2.6-.6s1.5.6 2.6.6c1.6 0 3-.9 3-2.7 0-2.2-2.5-5.8-5.6-5.8z'/></svg>Animals</button>
+        <button class="btn photo-tab" type="button" data-set="field" aria-selected="false"><svg viewBox='0 0 24 24' width='14' height='14' aria-hidden='true'><g fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M2.5 20 9 10.5l3.6 4.6 2.8-3.6L21.5 20z'/><path d='M9 10.5V3.5l5 2-5 2'/></g></svg>Field</button>
+      </div>
+      <div class="carousel">
+        <button class="carousel-arrow prev" type="button" aria-label="Previous photos"><svg viewBox='0 0 40 40' width='36' height='36' aria-hidden='true'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'><path d='M26.5 5.5c-2 2.3-5.4 5.6-8.6 8.5-2.6 2.4-5.8 4.6-8.4 6.6 2.9 1.7 6.4 4.7 9.4 7.6 2.5 2.4 5 4.6 7.6 6.9' stroke-width='2.8'/><path d='M24.6 7.8c-3.4 3.1-7.8 7.6-13.3 12.6 4.8 3.4 9.1 7.7 13.9 11.9' stroke-width='1.3' opacity='.6'/><path d='M8.8 20.7c3.5-.9 7.4-.2 11.3-.6 4.4-.4 8.6.5 12.7-.4' stroke-width='2.5'/><path d='M12.4 21.9c5.6-.6 11.4.4 17.6-.3 1.4-.1 2.6.3 3.6.1' stroke-width='1.1' opacity='.5'/><path d='M31.6 18.6c.9.6 1.6 1.2 1.9 1.6' stroke-width='1.4' opacity='.7'/></g></svg></button>
+        <div class="carousel-viewport">
+          <div class="photo-track" data-set="kkuragii">
+            <a href="images/photos/photo-16.jpeg" target="_blank"><img src="images/photos/photo-16.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-24.jpeg" target="_blank"><img src="images/photos/photo-24.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-25.jpeg" target="_blank"><img src="images/photos/photo-25.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-27.jpeg" target="_blank"><img src="images/photos/photo-27.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-29.jpeg" target="_blank"><img src="images/photos/photo-29.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-30.jpeg" target="_blank"><img src="images/photos/photo-30.jpeg" alt="" loading="lazy" /></a>
+          </div>
+          <div class="photo-track" data-set="scuba" hidden>
+            <a href="images/photos/photo-01.jpeg" target="_blank"><img src="images/photos/photo-01.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-19.jpeg" target="_blank"><img src="images/photos/photo-19.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-20.jpeg" target="_blank"><img src="images/photos/photo-20.jpeg" alt="" loading="lazy" /></a>
+          </div>
+          <div class="photo-track" data-set="animals" hidden>
+            <a href="images/photos/photo-02.jpeg" target="_blank"><img src="images/photos/photo-02.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-03.jpeg" target="_blank"><img src="images/photos/photo-03.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-04.jpeg" target="_blank"><img src="images/photos/photo-04.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-05.jpeg" target="_blank"><img src="images/photos/photo-05.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-07.jpeg" target="_blank"><img src="images/photos/photo-07.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-08.jpeg" target="_blank"><img src="images/photos/photo-08.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-09.jpeg" target="_blank"><img src="images/photos/photo-09.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-10.jpeg" target="_blank"><img src="images/photos/photo-10.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-11.jpeg" target="_blank"><img src="images/photos/photo-11.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-13.jpeg" target="_blank"><img src="images/photos/photo-13.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-14.jpeg" target="_blank"><img src="images/photos/photo-14.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-15.jpeg" target="_blank"><img src="images/photos/photo-15.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-28.jpeg" target="_blank"><img src="images/photos/photo-28.jpeg" alt="" loading="lazy" /></a>
+          </div>
+          <div class="photo-track" data-set="field" hidden>
+            <a href="images/photos/photo-06.jpeg" target="_blank"><img src="images/photos/photo-06.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-12.jpeg" target="_blank"><img src="images/photos/photo-12.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-17.jpeg" target="_blank"><img src="images/photos/photo-17.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-18.jpeg" target="_blank"><img src="images/photos/photo-18.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-21.jpeg" target="_blank"><img src="images/photos/photo-21.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-22.jpeg" target="_blank"><img src="images/photos/photo-22.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-23.jpeg" target="_blank"><img src="images/photos/photo-23.jpeg" alt="" loading="lazy" /></a>
+            <a href="images/photos/photo-26.jpeg" target="_blank"><img src="images/photos/photo-26.jpeg" alt="" loading="lazy" /></a>
+          </div>
+        </div>
+        <button class="carousel-arrow next" type="button" aria-label="Next photos"><svg viewBox='0 0 40 40' width='36' height='36' aria-hidden='true'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round'><path d='M26.5 5.5c-2 2.3-5.4 5.6-8.6 8.5-2.6 2.4-5.8 4.6-8.4 6.6 2.9 1.7 6.4 4.7 9.4 7.6 2.5 2.4 5 4.6 7.6 6.9' stroke-width='2.8'/><path d='M24.6 7.8c-3.4 3.1-7.8 7.6-13.3 12.6 4.8 3.4 9.1 7.7 13.9 11.9' stroke-width='1.3' opacity='.6'/><path d='M8.8 20.7c3.5-.9 7.4-.2 11.3-.6 4.4-.4 8.6.5 12.7-.4' stroke-width='2.5'/><path d='M12.4 21.9c5.6-.6 11.4.4 17.6-.3 1.4-.1 2.6.3 3.6.1' stroke-width='1.1' opacity='.5'/><path d='M31.6 18.6c.9.6 1.6 1.2 1.9 1.6' stroke-width='1.4' opacity='.7'/></g></svg></button>
+      </div>
     </section>
   </main>
 
