@@ -366,8 +366,8 @@ section.hero { padding: 0; border-bottom: 0; }
 .logos a { display: block; }
 .logos a[hidden] { display: none; }
 .logos img { display: block; height: 60px; width: auto; }
-/* Keep the official logo colors in dark mode by giving them a light backing */
-:root[data-theme="dark"] .logos a { padding: 6px 10px; background: rgba(255, 255, 255, 0.92); border-radius: 10px; }
+/* Dark mode: show the logos as white silhouettes, no light box behind them */
+:root[data-theme="dark"] .logos img { filter: brightness(0) invert(1); opacity: 0.85; }
 
 /* ---------- Footer ---------- */
 .footer {
