@@ -177,14 +177,14 @@ section.hero { padding: 0; border-bottom: 0; }
   align-items: flex-end;
 }
 /* Name sits over the dark sea, left of the profile photo */
-.hero-name {
-  margin: 0 0 28px;
+.hero-title {
+  margin: 0 0 12px;
   max-width: calc(100% - var(--photo) - 30px);
   color: #fff;
-  font-size: 42px;
-  line-height: 1.15;
   text-shadow: 0 2px 10px rgba(0, 20, 60, 0.5);
 }
+.hero-name { margin: 0 0 6px; font-size: 42px; line-height: 1.15; }
+.hero-role { margin: 0; font-size: 16px; line-height: 1.5; }
 
 /* Circle photo straddles the bottom edge of the banner, mostly hanging below it
    so the photo + buttons end close to where the About text ends */
@@ -396,7 +396,9 @@ section[id] { scroll-margin-top: 72px; } /* keep headings clear of the sticky na
 /* ---------- Mobile ---------- */
 @media (max-width: 640px) {
   .hero-banner .hero-inner { height: 220px; align-items: flex-start; justify-content: center; padding-top: 36px; }
-  .hero-name { max-width: 100%; margin: 0; font-size: 32px; text-align: center; }
+  .hero-title { max-width: 100%; margin: 0; text-align: center; }
+  .hero-name { font-size: 32px; margin-bottom: 4px; }
+  .hero-role { font-size: 15px; }
   .profile-img { width: 150px; height: 150px; right: 50%; transform: translate(50%, 50%); }
   .hero-below { grid-template-columns: 1fr; gap: 0; }
   .hero-below .buttons { order: -1; padding-top: 91px; }
